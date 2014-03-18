@@ -48,7 +48,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('nsx_id', sa.String(length=36), nullable=False),
         sa.ForeignKeyConstraint(['neutron_id'], ['securitygroups.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('neutron_id', 'nsx_id'))
+        sa.PrimaryKeyConstraint('neutron_id', 'nsx_id'),
+        mysql_engine='InnoDB')
     # Execute statement to add a record in security group mappings for
     # each record in securitygroups
     op.execute("INSERT INTO neutron_nsx_security_group_mappings SELECT id,id "

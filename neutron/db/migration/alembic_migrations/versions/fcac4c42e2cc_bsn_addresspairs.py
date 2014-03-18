@@ -48,6 +48,7 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('ip_address', sa.String(length=64), nullable=False),
         sa.ForeignKeyConstraint(['port_id'], ['ports.id'], ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('port_id', 'mac_address', 'ip_address'),
+        mysql_engine='InnoDB',
     )
 
 

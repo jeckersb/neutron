@@ -49,7 +49,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('edge_id', sa.String(length=36), nullable=False),
         sa.Column('rule_vseid', sa.String(length=36), nullable=True),
         sa.ForeignKeyConstraint(['rule_id'], ['firewall_rules.id'], ),
-        sa.PrimaryKeyConstraint('rule_id', 'edge_id')
+        sa.PrimaryKeyConstraint('rule_id', 'edge_id'),
+        mysql_engine='InnoDB'
     )
 
 

@@ -51,7 +51,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('segmentation_id', sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(['network_id'], ['networks.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('network_id')
+        sa.PrimaryKeyConstraint('network_id'),
+        mysql_engine='InnoDB'
     )
 
 

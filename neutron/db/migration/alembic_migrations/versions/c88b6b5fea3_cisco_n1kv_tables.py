@@ -53,7 +53,8 @@ def upgrade(active_plugins=None, options=None):
         'cisco_policy_profiles',
         sa.Column('id', sa.String(length=36), nullable=False),
         sa.Column('name', sa.String(length=255), nullable=True),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'cisco_n1kv_vmnetworks',
@@ -63,7 +64,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('port_count', sa.Integer(), autoincrement=False,
                   nullable=True),
         sa.ForeignKeyConstraint(['profile_id'], ['cisco_policy_profiles.id']),
-        sa.PrimaryKeyConstraint('name')
+        sa.PrimaryKeyConstraint('name'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'cisco_n1kv_vxlan_allocations',
@@ -71,7 +73,8 @@ def upgrade(active_plugins=None, options=None):
                   nullable=False),
         sa.Column('allocated', sa.Boolean(), autoincrement=False,
                   nullable=False),
-        sa.PrimaryKeyConstraint('vxlan_id')
+        sa.PrimaryKeyConstraint('vxlan_id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'cisco_network_profiles',
@@ -83,14 +86,16 @@ def upgrade(active_plugins=None, options=None):
                   nullable=True),
         sa.Column('multicast_ip_range', sa.String(length=255), nullable=True),
         sa.Column('physical_network', sa.String(length=255), nullable=True),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'cisco_n1kv_profile_bindings',
         sa.Column('profile_type', network_type, nullable=True),
         sa.Column('tenant_id', sa.String(length=36), nullable=False),
         sa.Column('profile_id', sa.String(length=36), nullable=False),
-        sa.PrimaryKeyConstraint('tenant_id', 'profile_id')
+        sa.PrimaryKeyConstraint('tenant_id', 'profile_id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'cisco_n1kv_port_bindings',
@@ -98,7 +103,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('profile_id', sa.String(length=36), nullable=True),
         sa.ForeignKeyConstraint(['port_id'], ['ports.id']),
         sa.ForeignKeyConstraint(['profile_id'], ['cisco_policy_profiles.id']),
-        sa.PrimaryKeyConstraint('port_id')
+        sa.PrimaryKeyConstraint('port_id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'cisco_n1kv_vlan_allocations',
@@ -111,7 +117,8 @@ def upgrade(active_plugins=None, options=None):
                   sa.Boolean(),
                   autoincrement=False,
                   nullable=False),
-        sa.PrimaryKeyConstraint('physical_network', 'vlan_id')
+        sa.PrimaryKeyConstraint('physical_network', 'vlan_id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'cisco_n1kv_network_bindings',
@@ -124,7 +131,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('profile_id', sa.String(length=36), nullable=True),
         sa.ForeignKeyConstraint(['network_id'], ['networks.id']),
         sa.ForeignKeyConstraint(['profile_id'], ['cisco_network_profiles.id']),
-        sa.PrimaryKeyConstraint('network_id')
+        sa.PrimaryKeyConstraint('network_id'),
+        mysql_engine='InnoDB'
     )
 
 

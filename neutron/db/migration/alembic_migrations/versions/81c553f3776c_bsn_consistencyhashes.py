@@ -44,7 +44,8 @@ def upgrade(active_plugins=None, options=None):
     op.create_table(
         'consistencyhashes',
         sa.Column('hash_id', sa.String(255), primary_key=True),
-        sa.Column('hash', sa.String(255), nullable=False)
+        sa.Column('hash', sa.String(255), nullable=False),
+        mysql_engine='InnoDB'
     )
 
 

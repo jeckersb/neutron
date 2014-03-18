@@ -55,14 +55,16 @@ def upgrade(active_plugins=None, options=None):
                   nullable=False),
         sa.ForeignKeyConstraint(['network_id'], ['networks.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('tunnel_key')
+        sa.PrimaryKeyConstraint('tunnel_key'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
         'tunnelkeylasts',
         sa.Column('last_key', sa.Integer(), autoincrement=False,
                   nullable=False),
-        sa.PrimaryKeyConstraint('last_key')
+        sa.PrimaryKeyConstraint('last_key'),
+        mysql_engine='InnoDB'
     )
 
 

@@ -55,5 +55,6 @@ def downgrade(active_plugins=None, options=None):
         sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
         sa.Column('address', sa.String(length=255)),
         sa.Column('host_type', sa.String(length=255)),
-        sa.PrimaryKeyConstraint(u'id')
+        sa.PrimaryKeyConstraint(u'id'),
+        mysql_engine='InnoDB'
     )

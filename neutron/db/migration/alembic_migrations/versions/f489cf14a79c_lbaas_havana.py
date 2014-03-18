@@ -58,7 +58,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column(u'connection_limit', sa.Integer(), nullable=True),
         sa.ForeignKeyConstraint(['port_id'], ['ports.id'], ),
         sa.UniqueConstraint('pool_id'),
-        sa.PrimaryKeyConstraint(u'id')
+        sa.PrimaryKeyConstraint(u'id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         u'sessionpersistences',
@@ -71,7 +72,8 @@ def upgrade(active_plugins=None, options=None):
                   nullable=False),
         sa.Column(u'cookie_name', sa.String(1024), nullable=True),
         sa.ForeignKeyConstraint(['vip_id'], [u'vips.id'], ),
-        sa.PrimaryKeyConstraint(u'vip_id')
+        sa.PrimaryKeyConstraint(u'vip_id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         u'pools',
@@ -93,7 +95,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column(u'status', sa.String(16), nullable=False),
         sa.Column(u'admin_state_up', sa.Boolean(), nullable=False),
         sa.ForeignKeyConstraint(['vip_id'], [u'vips.id'], ),
-        sa.PrimaryKeyConstraint(u'id')
+        sa.PrimaryKeyConstraint(u'id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         u'healthmonitors',
@@ -114,7 +117,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column(u'expected_codes', sa.String(64), nullable=True),
         sa.Column(u'status', sa.String(16), nullable=False),
         sa.Column(u'admin_state_up', sa.Boolean(), nullable=False),
-        sa.PrimaryKeyConstraint(u'id')
+        sa.PrimaryKeyConstraint(u'id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         u'poolmonitorassociations',
@@ -122,7 +126,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column(u'monitor_id', sa.String(36), nullable=False),
         sa.ForeignKeyConstraint(['monitor_id'], [u'healthmonitors.id'], ),
         sa.ForeignKeyConstraint(['pool_id'], [u'pools.id'], ),
-        sa.PrimaryKeyConstraint(u'pool_id', u'monitor_id')
+        sa.PrimaryKeyConstraint(u'pool_id', u'monitor_id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         u'members',
@@ -135,7 +140,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column(u'status', sa.String(16), nullable=False),
         sa.Column(u'admin_state_up', sa.Boolean(), nullable=False),
         sa.ForeignKeyConstraint(['pool_id'], [u'pools.id'], ),
-        sa.PrimaryKeyConstraint(u'id')
+        sa.PrimaryKeyConstraint(u'id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         u'poolstatisticss',
@@ -145,7 +151,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column(u'active_connections', sa.Integer(), nullable=False),
         sa.Column(u'total_connections', sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(['pool_id'], [u'pools.id'], ),
-        sa.PrimaryKeyConstraint(u'pool_id')
+        sa.PrimaryKeyConstraint(u'pool_id'),
+        mysql_engine='InnoDB'
     )
 
 

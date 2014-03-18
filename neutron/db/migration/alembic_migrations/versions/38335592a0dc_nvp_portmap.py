@@ -52,7 +52,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('nvp_id', sa.String(length=36), nullable=True),
         sa.ForeignKeyConstraint(['quantum_id'], ['ports.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('quantum_id'))
+        sa.PrimaryKeyConstraint('quantum_id'),
+        mysql_engine='InnoDB')
 
 
 def downgrade(active_plugins=None, options=None):

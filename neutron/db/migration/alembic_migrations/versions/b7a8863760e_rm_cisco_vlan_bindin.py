@@ -56,5 +56,6 @@ def downgrade(active_plugins=None, options=None):
         sa.Column('vlan_id', sa.Integer(display_width=11), nullable=False),
         sa.Column('vlan_name', sa.String(length=255), nullable=True),
         sa.Column('network_id', sa.String(length=255), nullable=False),
-        sa.PrimaryKeyConstraint('vlan_id')
+        sa.PrimaryKeyConstraint('vlan_id'),
+        mysql_engine='InnoDB'
     )

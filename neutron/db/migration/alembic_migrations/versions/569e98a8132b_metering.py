@@ -58,7 +58,8 @@ def upgrade(active_plugins=None, options=None):
                               nullable=True),
                     sa.Column('description', sa.String(length=255),
                               nullable=True),
-                    sa.PrimaryKeyConstraint('id'))
+                    sa.PrimaryKeyConstraint('id'),
+                    mysql_engine='InnoDB')
     op.create_table('meteringlabelrules',
                     sa.Column('id', sa.String(length=36), nullable=False),
                     sa.Column('direction',
@@ -74,4 +75,5 @@ def upgrade(active_plugins=None, options=None):
                     sa.ForeignKeyConstraint(['metering_label_id'],
                                             ['meteringlabels.id'],
                                             name='meteringlabelrules_ibfk_1'),
-                    sa.PrimaryKeyConstraint('id'))
+                    sa.PrimaryKeyConstraint('id'),
+                    mysql_engine='InnoDB')

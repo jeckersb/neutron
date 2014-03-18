@@ -59,6 +59,7 @@ def downgrade(active_plugins=None, options=None):
         sa.Column('vlan_id', sa.Integer, nullable=False),
         sa.Column('vlan_used', sa.Boolean),
         sa.PrimaryKeyConstraint('vlan_id'),
+        mysql_engine='InnoDB',
     )
 
     op.rename_table('cisco_credentials', 'credentials')

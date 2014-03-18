@@ -55,5 +55,6 @@ def downgrade(active_plugins=None, options=None):
                     sa.Column('port_id', sa.String(length=255),
                               primary_key=True, nullable=False),
                     sa.Column('host_id',
-                              sa.String(length=255), nullable=False)
+                              sa.String(length=255), nullable=False),
+                    mysql_engine='InnoDB'
                     )

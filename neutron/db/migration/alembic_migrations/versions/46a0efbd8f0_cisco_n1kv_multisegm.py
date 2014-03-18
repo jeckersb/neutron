@@ -47,7 +47,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('dot1qtag', sa.String(length=36), nullable=False),
         sa.ForeignKeyConstraint(['trunk_segment_id'], ['networks.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('trunk_segment_id', 'segment_id', 'dot1qtag')
+        sa.PrimaryKeyConstraint('trunk_segment_id', 'segment_id', 'dot1qtag'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'cisco_n1kv_multi_segments',
@@ -58,7 +59,8 @@ def upgrade(active_plugins=None, options=None):
         sa.ForeignKeyConstraint(['multi_segment_id'], ['networks.id'],
                                 ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('multi_segment_id', 'segment1_id',
-                                'segment2_id')
+                                'segment2_id'),
+        mysql_engine='InnoDB'
     )
     op.alter_column('cisco_network_profiles', 'segment_type',
                     existing_type=sa.Enum('vlan', 'vxlan', 'trunk',

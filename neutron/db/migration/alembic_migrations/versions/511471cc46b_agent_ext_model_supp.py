@@ -70,7 +70,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('heartbeat_timestamp', sa.DateTime(), nullable=False),
         sa.Column('description', sa.String(length=255), nullable=True),
         sa.Column('configurations', sa.String(length=4095), nullable=False),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     ### end Alembic commands ###
 

@@ -49,7 +49,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('csr_ipsec_policy_id', sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(['ipsec_site_conn_id'],
                                 ['ipsec_site_connections.id'],
-                                ondelete='CASCADE')
+                                ondelete='CASCADE'),
+        mysql_engine='InnoDB'
     )
 
 

@@ -66,7 +66,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('router_id', sa.String(length=36), nullable=False),
         sa.ForeignKeyConstraint(
             ['router_id'], ['routers.id'], ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('destination', 'nexthop', 'router_id')
+        sa.PrimaryKeyConstraint('destination', 'nexthop', 'router_id'),
+        mysql_engine='InnoDB'
     )
 
 

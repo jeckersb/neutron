@@ -54,7 +54,8 @@ def upgrade(active_plugins=None, options=None):
                               nullable=False),
                     sa.ForeignKeyConstraint(['network_id'], ['networks.id'],
                                             ondelete='CASCADE'),
-                    sa.PrimaryKeyConstraint('network_id'))
+                    sa.PrimaryKeyConstraint('network_id'),
+                    mysql_engine='InnoDB')
     op.create_table('portsecuritybindings',
                     sa.Column('port_id', sa.String(length=36),
                               nullable=False),
@@ -62,7 +63,8 @@ def upgrade(active_plugins=None, options=None):
                               nullable=False),
                     sa.ForeignKeyConstraint(['port_id'], ['ports.id'],
                                             ondelete='CASCADE'),
-                    sa.PrimaryKeyConstraint('port_id'))
+                    sa.PrimaryKeyConstraint('port_id'),
+                    mysql_engine='InnoDB')
     ### end Alembic commands ###
 
     # Copy network and port ids over to network|port(securitybindings) table

@@ -49,6 +49,7 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('quantum_id', sa.String(length=36), nullable=False),
         sa.PrimaryKeyConstraint('quantum_id'),
         sa.UniqueConstraint('ofc_id'),
+        mysql_engine='InnoDB',
     )
     op.create_table(
         'routerproviders',
@@ -57,6 +58,7 @@ def upgrade(active_plugins=None, options=None):
         sa.ForeignKeyConstraint(['router_id'], ['routers.id'],
                                 ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('router_id'),
+        mysql_engine='InnoDB',
     )
 
 

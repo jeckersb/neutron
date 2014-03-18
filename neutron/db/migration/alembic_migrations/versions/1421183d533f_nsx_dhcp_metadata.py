@@ -49,7 +49,8 @@ def upgrade(active_plugins=None, options=None):
                   sa.String(length=36), nullable=False),
         sa.Column('lsn_id',
                   sa.String(length=36), nullable=False),
-        sa.PrimaryKeyConstraint('lsn_id'))
+        sa.PrimaryKeyConstraint('lsn_id'),
+        mysql_engine='InnoDB')
 
     op.create_table(
         'lsn_port',
@@ -63,7 +64,8 @@ def upgrade(active_plugins=None, options=None):
                   sa.String(length=32), nullable=False, unique=True),
         sa.ForeignKeyConstraint(['lsn_id'], ['lsn.lsn_id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('lsn_port_id'))
+        sa.PrimaryKeyConstraint('lsn_port_id'),
+        mysql_engine='InnoDB')
 
 
 def downgrade(active_plugins=None, options=None):

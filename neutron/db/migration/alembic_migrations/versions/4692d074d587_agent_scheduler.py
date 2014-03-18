@@ -62,7 +62,8 @@ def upgrade(active_plugins=None, options=None):
                                 ondelete='CASCADE'),
         sa.ForeignKeyConstraint(['network_id'], ['networks.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('network_id', 'dhcp_agent_id')
+        sa.PrimaryKeyConstraint('network_id', 'dhcp_agent_id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'routerl3agentbindings',
@@ -73,7 +74,8 @@ def upgrade(active_plugins=None, options=None):
                                 ondelete='CASCADE'),
         sa.ForeignKeyConstraint(['router_id'], ['routers.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     ### end Alembic commands ###
 

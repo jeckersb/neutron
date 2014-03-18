@@ -65,7 +65,8 @@ def downgrade(active_plugins=None, options=None):
         sa.Column(u'qos', sa.String(255), nullable=True),
         sa.Column(u'tenant_id', sa.String(255), nullable=True),
         sa.Column(u'vif_id', sa.String(255), nullable=True),
-        sa.PrimaryKeyConstraint(u'id')
+        sa.PrimaryKeyConstraint(u'id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         u'portprofiles',
@@ -73,7 +74,8 @@ def downgrade(active_plugins=None, options=None):
         sa.Column(u'name', sa.String(255), nullable=True),
         sa.Column(u'vlan_id', sa.Integer(), nullable=True),
         sa.Column(u'qos', sa.String(255), nullable=True),
-        sa.PrimaryKeyConstraint(u'uuid')
+        sa.PrimaryKeyConstraint(u'uuid'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         u'portprofile_bindings',
@@ -84,5 +86,6 @@ def downgrade(active_plugins=None, options=None):
         sa.Column(u'default', sa.Boolean(), nullable=False),
         sa.ForeignKeyConstraint(['portprofile_id'], ['portprofiles.uuid'], ),
         sa.ForeignKeyConstraint(['port_id'], ['ports.id'], ),
-        sa.PrimaryKeyConstraint(u'id')
+        sa.PrimaryKeyConstraint(u'id'),
+        mysql_engine='InnoDB'
     )

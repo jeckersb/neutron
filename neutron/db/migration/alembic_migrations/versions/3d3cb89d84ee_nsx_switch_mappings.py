@@ -51,6 +51,7 @@ def upgrade(active_plugins=None, options=None):
                                 ondelete='CASCADE'),
         # There might be multiple switches for a neutron network
         sa.PrimaryKeyConstraint('neutron_id', 'nsx_id'),
+        mysql_engine='InnoDB',
     )
 
 

@@ -55,7 +55,8 @@ def upgrade(active_plugins=None, options=None):
                                 ondelete='CASCADE'),
         sa.ForeignKeyConstraint(['segment'], ['ml2_network_segments.id'],
                                 ondelete='SET NULL'),
-        sa.PrimaryKeyConstraint('port_id')
+        sa.PrimaryKeyConstraint('port_id'),
+        mysql_engine='InnoDB'
     )
 
     # Note that 176a85fc7d79_add_portbindings_db.py was never enabled

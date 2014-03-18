@@ -54,13 +54,15 @@ def upgrade(active_plugins=None, options=None):
                               nullable=True),
                     sa.ForeignKeyConstraint(['router_id'], ['routers.id'],
                                             ondelete='CASCADE'),
-                    sa.PrimaryKeyConstraint('id'))
+                    sa.PrimaryKeyConstraint('id'),
+                    mysql_engine='InnoDB')
     op.create_table('nexthops',
                     sa.Column('rule_id', sa.Integer(), nullable=False),
                     sa.Column('nexthop', sa.String(length=64), nullable=False),
                     sa.ForeignKeyConstraint(['rule_id'], ['routerrules.id'],
                                             ondelete='CASCADE'),
-                    sa.PrimaryKeyConstraint('rule_id', 'nexthop'))
+                    sa.PrimaryKeyConstraint('rule_id', 'nexthop'),
+                    mysql_engine='InnoDB')
 
 
 def downgrade(active_plugins=None, options=None):

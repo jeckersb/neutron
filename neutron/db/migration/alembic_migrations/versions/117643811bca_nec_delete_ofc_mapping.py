@@ -186,23 +186,27 @@ def downgrade(active_plugins=None, options=None):
         'ofctenants',
         sa.Column('id', sa.String(length=36), nullable=False),
         sa.Column('quantum_id', sa.String(length=36), nullable=False),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'ofcnetworks',
         sa.Column('id', sa.String(length=36), nullable=False),
         sa.Column('quantum_id', sa.String(length=36), nullable=False),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'ofcports',
         sa.Column('id', sa.String(length=36), nullable=False),
         sa.Column('quantum_id', sa.String(length=36), nullable=False),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'ofcfilters',
         sa.Column('id', sa.String(length=36), nullable=False),
         sa.Column('quantum_id', sa.String(length=36), nullable=False),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )

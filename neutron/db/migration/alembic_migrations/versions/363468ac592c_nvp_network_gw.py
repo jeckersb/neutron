@@ -52,7 +52,8 @@ def upgrade(active_plugins=None, options=None):
                     sa.Column('tenant_id', sa.String(length=36),
                               nullable=True),
                     sa.Column('default', sa.Boolean(), nullable=True),
-                    sa.PrimaryKeyConstraint('id'))
+                    sa.PrimaryKeyConstraint('id'),
+                    mysql_engine='InnoDB')
     op.create_table('networkgatewaydevices',
                     sa.Column('id', sa.String(length=36), nullable=False),
                     sa.Column('network_gateway_id', sa.String(length=36),
@@ -62,7 +63,8 @@ def upgrade(active_plugins=None, options=None):
                     sa.ForeignKeyConstraint(['network_gateway_id'],
                                             ['networkgateways.id'],
                                             ondelete='CASCADE'),
-                    sa.PrimaryKeyConstraint('id'))
+                    sa.PrimaryKeyConstraint('id'),
+                    mysql_engine='InnoDB')
     op.create_table('networkconnections',
                     sa.Column('tenant_id', sa.String(length=255),
                               nullable=True),
@@ -88,7 +90,8 @@ def upgrade(active_plugins=None, options=None):
                     sa.PrimaryKeyConstraint('port_id'),
                     sa.UniqueConstraint('network_gateway_id',
                                         'segmentation_type',
-                                        'segmentation_id'))
+                                        'segmentation_id'),
+                    mysql_engine='InnoDB')
 
 
 def downgrade(active_plugins=None, options=None):

@@ -71,7 +71,8 @@ def upgrade(active_plugins=None, options=None):
             'pfs',
             sa.Enum('group2', 'group5', 'group14', name='vpn_pfs'),
             nullable=False),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'ipsecpolicies',
@@ -108,7 +109,8 @@ def upgrade(active_plugins=None, options=None):
             sa.Enum(
                 'group2', 'group5', 'group14', name='vpn_pfs'),
             nullable=False),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'vpnservices',
@@ -122,7 +124,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('router_id', sa.String(length=36), nullable=False),
         sa.ForeignKeyConstraint(['router_id'], ['routers.id'], ),
         sa.ForeignKeyConstraint(['subnet_id'], ['subnets.id'], ),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'ipsec_site_connections',
@@ -157,7 +160,8 @@ def upgrade(active_plugins=None, options=None):
         sa.ForeignKeyConstraint(['ikepolicy_id'], ['ikepolicies.id']),
         sa.ForeignKeyConstraint(['ipsecpolicy_id'], ['ipsecpolicies.id']),
         sa.ForeignKeyConstraint(['vpnservice_id'], ['vpnservices.id']),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'ipsecpeercidrs',
@@ -168,7 +172,8 @@ def upgrade(active_plugins=None, options=None):
         sa.ForeignKeyConstraint(['ipsec_site_connection_id'],
                                 ['ipsec_site_connections.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('cidr', 'ipsec_site_connection_id')
+        sa.PrimaryKeyConstraint('cidr', 'ipsec_site_connection_id'),
+        mysql_engine='InnoDB'
     )
 
 

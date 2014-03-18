@@ -66,7 +66,8 @@ def upgrade(active_plugins=None, options=None):
                     sa.Column('phy_uuid', sa.String(36), primary_key=True,
                               nullable=True),
                     sa.Column('vlan_id', sa.Integer, primary_key=True,
-                              nullable=True, autoincrement=False))
+                              nullable=True, autoincrement=False),
+                    mysql_engine='InnoDB')
     # copy data from nvp_network_bindings into rename_nvp_network_bindings
     op.execute("INSERT INTO rename_nvp_network_bindings SELECT network_id, "
                "binding_type, phy_uuid, vlan_id from nvp_network_bindings")
@@ -92,7 +93,8 @@ def downgrade(active_plugins=None, options=None):
                           name=('nvp_network_bindings_binding_type')),
                   nullable=False),
         sa.Column('phy_uuid', sa.String(36), nullable=True),
-        sa.Column('vlan_id', sa.Integer, nullable=True, autoincrement=False))
+        sa.Column('vlan_id', sa.Integer, nullable=True, autoincrement=False),
+        mysql_engine='InnoDB')
 
     # copy data from nvp_network_bindings into rename_nvp_network_bindings
     op.execute("INSERT INTO rename_nvp_network_bindings SELECT network_id, "

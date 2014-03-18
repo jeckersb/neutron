@@ -50,7 +50,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('tenant_id', sa.String(length=255), nullable=True),
         sa.Column('resource', sa.String(length=255), nullable=True),
         sa.Column('limit', sa.Integer(), nullable=True),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     ### end Alembic commands ###
 

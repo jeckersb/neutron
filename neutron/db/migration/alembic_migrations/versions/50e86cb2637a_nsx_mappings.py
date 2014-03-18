@@ -55,7 +55,8 @@ def upgrade(active_plugins=None, options=None):
                               nullable=True),
                     sa.ForeignKeyConstraint(['neutron_id'], ['ports.id'],
                                             ondelete='CASCADE'),
-                    sa.PrimaryKeyConstraint('neutron_id'))
+                    sa.PrimaryKeyConstraint('neutron_id'),
+                    mysql_engine='InnoDB')
 
     op.execute("INSERT INTO neutron_nsx_port_mappings SELECT quantum_id as "
                "neutron_id, nvp_id as nsx_port_id, null as nsx_switch_id from"
@@ -75,7 +76,8 @@ def downgrade(active_plugins=None, options=None):
                               nullable=False),
                     sa.ForeignKeyConstraint(['quantum_id'], ['ports.id'],
                                             ondelete='CASCADE'),
-                    sa.PrimaryKeyConstraint('quantum_id'))
+                    sa.PrimaryKeyConstraint('quantum_id'),
+                    mysql_engine='InnoDB')
     op.execute("INSERT INTO quantum_nvp_port_mapping SELECT neutron_id as "
                "quantum_id, nsx_port_id as nvp_id from"
                " neutron_nsx_port_mappings")

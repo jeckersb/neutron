@@ -61,7 +61,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('shared', sa.Boolean(), autoincrement=False, nullable=True),
         sa.Column('audited', sa.Boolean(), autoincrement=False,
                   nullable=True),
-        sa.PrimaryKeyConstraint('id'))
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB')
     op.create_table(
         'firewalls', sa.Column('tenant_id', sa.String(length=255),
                                nullable=True),
@@ -76,7 +77,8 @@ def upgrade(active_plugins=None, options=None):
         sa.ForeignKeyConstraint(['firewall_policy_id'],
                                 ['firewall_policies.id'],
                                 name='firewalls_ibfk_1'),
-        sa.PrimaryKeyConstraint('id'))
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB')
     op.create_table(
         'firewall_rules',
         sa.Column('tenant_id', sa.String(length=255), nullable=True),
@@ -106,4 +108,5 @@ def upgrade(active_plugins=None, options=None):
         sa.ForeignKeyConstraint(['firewall_policy_id'],
                                 ['firewall_policies.id'],
                                 name='firewall_rules_ibfk_1'),
-        sa.PrimaryKeyConstraint('id'))
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB')

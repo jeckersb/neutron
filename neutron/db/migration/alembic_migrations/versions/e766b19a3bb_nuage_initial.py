@@ -49,6 +49,7 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('resource', sa.String(length=255), nullable=True),
         sa.Column('limit', sa.Integer(), nullable=True),
         sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB',
     )
     op.create_table(
         'net_partitions',
@@ -57,6 +58,7 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('l3dom_tmplt_id', sa.String(length=36), nullable=True),
         sa.Column('l2dom_tmplt_id', sa.String(length=36), nullable=True),
         sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB',
     )
     op.create_table(
         'port_mapping',
@@ -67,6 +69,7 @@ def upgrade(active_plugins=None, options=None):
         sa.ForeignKeyConstraint(['port_id'], ['ports.id'],
                                 ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('port_id'),
+        mysql_engine='InnoDB',
     )
     op.create_table(
         'subnet_l2dom_mapping',
@@ -82,6 +85,7 @@ def upgrade(active_plugins=None, options=None):
         sa.ForeignKeyConstraint(['subnet_id'], ['subnets.id'],
                                 ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('subnet_id'),
+        mysql_engine='InnoDB',
     )
     op.create_table(
         'net_partition_router_mapping',
@@ -93,6 +97,7 @@ def upgrade(active_plugins=None, options=None):
         sa.ForeignKeyConstraint(['router_id'], ['routers.id'],
                                 ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('router_id'),
+        mysql_engine='InnoDB',
     )
     op.create_table(
         'router_zone_mapping',
@@ -103,6 +108,7 @@ def upgrade(active_plugins=None, options=None):
         sa.ForeignKeyConstraint(['router_id'], ['routers.id'],
                                 ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('router_id'),
+        mysql_engine='InnoDB',
     )
 
 

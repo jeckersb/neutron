@@ -54,5 +54,6 @@ def downgrade(active_plugins=None, options=None):
     op.create_table(
         'ovs_tunnel_ips',
         sa.Column('ip_address', sa.String(length=255), nullable=False),
-        sa.PrimaryKeyConstraint('ip_address')
+        sa.PrimaryKeyConstraint('ip_address'),
+        mysql_engine='InnoDB'
     )

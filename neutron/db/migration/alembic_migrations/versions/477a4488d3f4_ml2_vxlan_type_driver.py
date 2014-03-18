@@ -49,7 +49,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('vxlan_vni', sa.Integer, nullable=False,
                   autoincrement=False),
         sa.Column('allocated', sa.Boolean, nullable=False),
-        sa.PrimaryKeyConstraint('vxlan_vni')
+        sa.PrimaryKeyConstraint('vxlan_vni'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -57,7 +58,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('ip_address', sa.String(length=64)),
         sa.Column('udp_port', sa.Integer(), nullable=False,
                   autoincrement=False),
-        sa.PrimaryKeyConstraint('ip_address', 'udp_port')
+        sa.PrimaryKeyConstraint('ip_address', 'udp_port'),
+        mysql_engine='InnoDB'
     )
 
 

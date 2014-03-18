@@ -50,7 +50,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('pool_vseid', sa.String(length=36), nullable=True),
         sa.ForeignKeyConstraint(['pool_id'], ['pools.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('pool_id', 'edge_id')
+        sa.PrimaryKeyConstraint('pool_id', 'edge_id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'vcns_edge_monitor_bindings',
@@ -59,7 +60,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('monitor_vseid', sa.String(length=36), nullable=True),
         sa.ForeignKeyConstraint(['monitor_id'], ['healthmonitors.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('monitor_id', 'edge_id')
+        sa.PrimaryKeyConstraint('monitor_id', 'edge_id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'vcns_edge_vip_bindings',
@@ -69,7 +71,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('app_profileid', sa.String(length=36), nullable=True),
         sa.ForeignKeyConstraint(['vip_id'], ['vips.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('vip_id')
+        sa.PrimaryKeyConstraint('vip_id'),
+        mysql_engine='InnoDB'
     )
 
 

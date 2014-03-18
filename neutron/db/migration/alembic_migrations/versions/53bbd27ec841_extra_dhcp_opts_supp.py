@@ -52,7 +52,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('opt_value', sa.String(length=255), nullable=False),
         sa.ForeignKeyConstraint(['port_id'], ['ports.id'], ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('id'),
-        sa.UniqueConstraint('port_id', 'opt_name', name='uidx_portid_optname'))
+        sa.UniqueConstraint('port_id', 'opt_name', name='uidx_portid_optname'),
+        mysql_engine='InnoDB')
 
 
 def downgrade(active_plugins=None, options=None):

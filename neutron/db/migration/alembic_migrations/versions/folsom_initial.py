@@ -115,7 +115,8 @@ def upgrade_base():
         sa.Column('status', sa.String(length=16), nullable=True),
         sa.Column('admin_state_up', sa.Boolean(), nullable=True),
         sa.Column('shared', sa.Boolean(), nullable=True),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -130,7 +131,8 @@ def upgrade_base():
         sa.Column('enable_dhcp', sa.Boolean(), nullable=True),
         sa.Column('shared', sa.Boolean(), nullable=True),
         sa.ForeignKeyConstraint(['network_id'], ['networks.id'], ),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -145,7 +147,8 @@ def upgrade_base():
         sa.Column('device_id', sa.String(length=255), nullable=False),
         sa.Column('device_owner', sa.String(length=255), nullable=False),
         sa.ForeignKeyConstraint(['network_id'], ['networks.id'], ),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -154,7 +157,8 @@ def upgrade_base():
         sa.Column('subnet_id', sa.String(length=36), nullable=False),
         sa.ForeignKeyConstraint(['subnet_id'], ['subnets.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('address', 'subnet_id')
+        sa.PrimaryKeyConstraint('address', 'subnet_id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -170,7 +174,8 @@ def upgrade_base():
                                 ondelete='CASCADE'),
         sa.ForeignKeyConstraint(['subnet_id'], ['subnets.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('ip_address', 'subnet_id', 'network_id')
+        sa.PrimaryKeyConstraint('ip_address', 'subnet_id', 'network_id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -180,7 +185,8 @@ def upgrade_base():
         sa.Column('subnet_id', sa.String(length=36), nullable=False),
         sa.ForeignKeyConstraint(['subnet_id'], ['subnets.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('destination', 'nexthop', 'subnet_id')
+        sa.PrimaryKeyConstraint('destination', 'nexthop', 'subnet_id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -191,7 +197,8 @@ def upgrade_base():
         sa.Column('last_ip', sa.String(length=64), nullable=False),
         sa.ForeignKeyConstraint(['subnet_id'], ['subnets.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -202,7 +209,8 @@ def upgrade_base():
         sa.ForeignKeyConstraint(['allocation_pool_id'],
                                 ['ipallocationpools.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('allocation_pool_id', 'first_ip', 'last_ip')
+        sa.PrimaryKeyConstraint('allocation_pool_id', 'first_ip', 'last_ip'),
+        mysql_engine='InnoDB'
     )
 
 
@@ -213,7 +221,8 @@ def upgrade_linuxbridge():
         sa.Column('vlan_id', sa.Integer(), autoincrement=False,
                   nullable=False),
         sa.Column('allocated', sa.Boolean(), nullable=False),
-        sa.PrimaryKeyConstraint('physical_network', 'vlan_id')
+        sa.PrimaryKeyConstraint('physical_network', 'vlan_id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -224,7 +233,8 @@ def upgrade_linuxbridge():
                   nullable=False),
         sa.ForeignKeyConstraint(['network_id'], ['networks.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('network_id')
+        sa.PrimaryKeyConstraint('network_id'),
+        mysql_engine='InnoDB'
     )
 
 
@@ -233,13 +243,15 @@ def upgrade_ovs():
         'ovs_tunnel_endpoints',
         sa.Column('ip_address', sa.String(length=64), nullable=False),
         sa.Column('id', sa.Integer(), nullable=False),
-        sa.PrimaryKeyConstraint('ip_address')
+        sa.PrimaryKeyConstraint('ip_address'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
         'ovs_tunnel_ips',
         sa.Column('ip_address', sa.String(length=255), nullable=False),
-        sa.PrimaryKeyConstraint('ip_address')
+        sa.PrimaryKeyConstraint('ip_address'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -248,7 +260,8 @@ def upgrade_ovs():
         sa.Column('vlan_id', sa.Integer(), autoincrement=False,
                   nullable=False),
         sa.Column('allocated', sa.Boolean(), nullable=False),
-        sa.PrimaryKeyConstraint('physical_network', 'vlan_id')
+        sa.PrimaryKeyConstraint('physical_network', 'vlan_id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -256,7 +269,8 @@ def upgrade_ovs():
         sa.Column('tunnel_id', sa.Integer(), autoincrement=False,
                   nullable=False),
         sa.Column('allocated', sa.Boolean(), nullable=False),
-        sa.PrimaryKeyConstraint('tunnel_id')
+        sa.PrimaryKeyConstraint('tunnel_id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -267,7 +281,8 @@ def upgrade_ovs():
         sa.Column('segmentation_id', sa.Integer(), nullable=True),
         sa.ForeignKeyConstraint(['network_id'], ['networks.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('network_id')
+        sa.PrimaryKeyConstraint('network_id'),
+        mysql_engine='InnoDB'
     )
 
 
@@ -278,7 +293,8 @@ def upgrade_meta():
         sa.Column('network_id', sa.String(length=36), nullable=False),
         sa.ForeignKeyConstraint(['network_id'], ['networks.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('network_id')
+        sa.PrimaryKeyConstraint('network_id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -287,7 +303,8 @@ def upgrade_meta():
         sa.Column('router_id', sa.String(length=36), nullable=False),
         sa.ForeignKeyConstraint(['router_id'], ['routers.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('router_id')
+        sa.PrimaryKeyConstraint('router_id'),
+        mysql_engine='InnoDB'
     )
 
 
@@ -296,28 +313,32 @@ def upgrade_nec():
         'ofctenants',
         sa.Column('id', sa.String(length=36), nullable=False),
         sa.Column('quantum_id', sa.String(length=36), nullable=False),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
         'ofcnetworks',
         sa.Column('id', sa.String(length=36), nullable=False),
         sa.Column('quantum_id', sa.String(length=36), nullable=False),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
         'ofcports',
         sa.Column('id', sa.String(length=36), nullable=False),
         sa.Column('quantum_id', sa.String(length=36), nullable=False),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
         'ofcfilters',
         sa.Column('id', sa.String(length=36), nullable=False),
         sa.Column('quantum_id', sa.String(length=36), nullable=False),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -327,7 +348,8 @@ def upgrade_nec():
         sa.Column('port_no', sa.Integer(), nullable=False),
         sa.Column('vlan_id', sa.Integer(), nullable=False),
         sa.Column('mac', sa.String(length=32), nullable=False),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -350,7 +372,8 @@ def upgrade_nec():
         sa.Column('status', sa.String(16), nullable=False),
         sa.ForeignKeyConstraint(['network_id'], ['networks.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
 
@@ -360,7 +383,8 @@ def upgrade_ryu():
         sa.Column('id', sa.Integer(), autoincrement=False, nullable=False),
         sa.Column('address', sa.String(255)),
         sa.Column('host_type', sa.String(255)),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
 
@@ -369,7 +393,8 @@ def upgrade_brocade():
         'brocadenetworks',
         sa.Column('id', sa.Integer(), autoincrement=False, nullable=False),
         sa.Column('vlan', sa.String(10)),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -380,7 +405,8 @@ def upgrade_brocade():
         sa.Column('physical_interface', sa.String(36)),
         sa.Column('vlan_id', sa.String(10)),
         sa.Column('tenant_id', sa.String(36)),
-        sa.PrimaryKeyConstraint('port_id')
+        sa.PrimaryKeyConstraint('port_id'),
+        mysql_engine='InnoDB'
     )
 
 
@@ -389,7 +415,8 @@ def upgrade_cisco():
         'cisco_vlan_ids',
         sa.Column('vlan_id', sa.Integer(), autoincrement=True),
         sa.Column('vlan_used', sa.Boolean()),
-        sa.PrimaryKeyConstraint('vlan_id')
+        sa.PrimaryKeyConstraint('vlan_id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -397,7 +424,8 @@ def upgrade_cisco():
         sa.Column('vlan_id', sa.Integer(), autoincrement=True),
         sa.Column('vlan_name', sa.String(255)),
         sa.Column('network_id', sa.String(255), nullable=False),
-        sa.PrimaryKeyConstraint('vlan_id')
+        sa.PrimaryKeyConstraint('vlan_id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -406,7 +434,8 @@ def upgrade_cisco():
         sa.Column('name', sa.String(255)),
         sa.Column('vlan_id', sa.Integer()),
         sa.Column('qos', sa.String(255)),
-        sa.PrimaryKeyConstraint('uuid')
+        sa.PrimaryKeyConstraint('uuid'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -419,6 +448,7 @@ def upgrade_cisco():
         sa.PrimaryKeyConstraint('id'),
         sa.ForeignKeyConstraint(['port_id'], ['ports.id'], ),
         sa.ForeignKeyConstraint(['portprofile_id'], ['portprofiles.uuid'], ),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -427,7 +457,8 @@ def upgrade_cisco():
         sa.Column('tenant_id', sa.String(255)),
         sa.Column('qos_name', sa.String(255)),
         sa.Column('qos_desc', sa.String(255)),
-        sa.PrimaryKeyConstraint('tenant_id', 'qos_name')
+        sa.PrimaryKeyConstraint('tenant_id', 'qos_name'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -437,7 +468,8 @@ def upgrade_cisco():
         sa.Column('credential_name', sa.String(255)),
         sa.Column('user_name', sa.String(255)),
         sa.Column('password', sa.String(255)),
-        sa.PrimaryKeyConstraint('tenant_id', 'credential_name')
+        sa.PrimaryKeyConstraint('tenant_id', 'credential_name'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -452,7 +484,8 @@ def upgrade_cisco():
         sa.Column('tenant_id', sa.String(255)),
         sa.Column('instance_id', sa.String(255)),
         sa.Column('vif_id', sa.String(255)),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -460,7 +493,8 @@ def upgrade_cisco():
         sa.Column('id', sa.Integer(), primary_key=True, autoincrement=True),
         sa.Column('port_id', sa.String(255)),
         sa.Column('vlan_id', sa.Integer()),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
 

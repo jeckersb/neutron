@@ -56,7 +56,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('port_id', sa.String(length=36), nullable=False),
         sa.Column('host', sa.String(length=255), nullable=False),
         sa.ForeignKeyConstraint(['port_id'], ['ports.id'], ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('port_id')
+        sa.PrimaryKeyConstraint('port_id'),
+        mysql_engine='InnoDB'
     )
 
 

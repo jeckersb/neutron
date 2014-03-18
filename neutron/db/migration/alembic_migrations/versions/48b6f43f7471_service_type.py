@@ -53,7 +53,8 @@ def upgrade(active_plugins=None, options=None):
                   autoincrement=False, nullable=False),
         sa.Column(u'num_instances', sa.Integer(),
                   autoincrement=False, nullable=True),
-        sa.PrimaryKeyConstraint(u'id'))
+        sa.PrimaryKeyConstraint(u'id'),
+        mysql_engine='InnoDB')
     op.create_table(
         u'servicedefinitions',
         sa.Column(u'id', sa.String(36), nullable=False),
@@ -65,7 +66,8 @@ def upgrade(active_plugins=None, options=None):
                   nullable=False),
         sa.ForeignKeyConstraint(['service_type_id'], [u'servicetypes.id'],
                                 name=u'servicedefinitions_ibfk_1'),
-        sa.PrimaryKeyConstraint(u'id', u'service_class', u'service_type_id'))
+        sa.PrimaryKeyConstraint(u'id', u'service_class', u'service_type_id'),
+        mysql_engine='InnoDB')
 
 
 def downgrade(active_plugins=None, options=None):

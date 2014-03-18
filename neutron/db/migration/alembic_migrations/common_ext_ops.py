@@ -31,7 +31,8 @@ def upgrade_l3():
         sa.Column('admin_state_up', sa.Boolean(), nullable=True),
         sa.Column('gw_port_id', sa.String(length=36), nullable=True),
         sa.ForeignKeyConstraint(['gw_port_id'], ['ports.id'], ),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -39,7 +40,8 @@ def upgrade_l3():
         sa.Column('network_id', sa.String(length=36), nullable=False),
         sa.ForeignKeyConstraint(['network_id'], ['networks.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('network_id')
+        sa.PrimaryKeyConstraint('network_id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
@@ -55,7 +57,8 @@ def upgrade_l3():
         sa.ForeignKeyConstraint(['fixed_port_id'], ['ports.id'], ),
         sa.ForeignKeyConstraint(['floating_port_id'], ['ports.id'], ),
         sa.ForeignKeyConstraint(['router_id'], ['routers.id'], ),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
 
@@ -69,7 +72,8 @@ def upgrade_quota(options=None):
         sa.Column('tenant_id', sa.String(255), index=True),
         sa.Column('resource', sa.String(255)),
         sa.Column('limit', sa.Integer()),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
 
 

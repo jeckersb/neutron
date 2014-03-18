@@ -57,7 +57,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('vlan_id', sa.Integer(), nullable=True),
         sa.ForeignKeyConstraint(['network_id'], ['networks.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('network_id'))
+        sa.PrimaryKeyConstraint('network_id'),
+        mysql_engine='InnoDB')
 
 
 def downgrade(active_plugins=None, options=None):

@@ -49,7 +49,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('segment_id', sa.String(length=36), nullable=True),
         sa.Column('network_type', sa.String(length=10), nullable=True),
         sa.Column('tenant_id', sa.String(length=255), nullable=True),
-        sa.PrimaryKeyConstraint('id'))
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB')
 
     op.create_table(
         'ml2_brocadeports',
@@ -59,7 +60,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('physical_interface', sa.String(length=36), nullable=True),
         sa.Column('vlan_id', sa.String(length=36), nullable=True),
         sa.Column('tenant_id', sa.String(length=255), nullable=True),
-        sa.PrimaryKeyConstraint('id'))
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB')
 
 
 def downgrade(active_plugins=None, options=None):

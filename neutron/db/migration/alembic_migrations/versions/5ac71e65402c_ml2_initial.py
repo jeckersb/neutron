@@ -54,7 +54,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('segmentation_id', sa.Integer(), nullable=True),
         sa.ForeignKeyConstraint(['network_id'], ['networks.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'ml2_vlan_allocations',
@@ -63,12 +64,14 @@ def upgrade(active_plugins=None, options=None):
                   nullable=False),
         sa.Column('allocated', sa.Boolean(), autoincrement=False,
                   nullable=False),
-        sa.PrimaryKeyConstraint('physical_network', 'vlan_id')
+        sa.PrimaryKeyConstraint('physical_network', 'vlan_id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'ml2_flat_allocations',
         sa.Column('physical_network', sa.String(length=64), nullable=False),
-        sa.PrimaryKeyConstraint('physical_network')
+        sa.PrimaryKeyConstraint('physical_network'),
+        mysql_engine='InnoDB'
     )
     ### end Alembic commands ###
 

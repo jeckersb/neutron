@@ -58,7 +58,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('id', sa.String(length=36), nullable=False),
         sa.Column('name', sa.String(length=255), nullable=True),
         sa.Column('description', sa.String(length=255), nullable=True),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'securitygrouprules',
@@ -79,7 +80,8 @@ def upgrade(active_plugins=None, options=None):
                                 ondelete='CASCADE'),
         sa.ForeignKeyConstraint(['remote_group_id'], ['securitygroups.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'securitygroupportbindings',
@@ -87,7 +89,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('security_group_id', sa.String(length=36), nullable=False),
         sa.ForeignKeyConstraint(['port_id'], ['ports.id'], ondelete='CASCADE'),
         sa.ForeignKeyConstraint(['security_group_id'], ['securitygroups.id']),
-        sa.PrimaryKeyConstraint('port_id', 'security_group_id')
+        sa.PrimaryKeyConstraint('port_id', 'security_group_id'),
+        mysql_engine='InnoDB'
     )
     ### end Alembic commands ###
 

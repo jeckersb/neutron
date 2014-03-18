@@ -50,6 +50,7 @@ def upgrade(active_plugins=None, options=None):
         sa.ForeignKeyConstraint(['neutron_id'], ['routers.id'],
                                 ondelete='CASCADE'),
         sa.PrimaryKeyConstraint('neutron_id'),
+        mysql_engine='InnoDB',
     )
     # Execute statement to a record in nsx_router_mappings for
     # each record in routers

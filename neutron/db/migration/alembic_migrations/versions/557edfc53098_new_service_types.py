@@ -48,6 +48,7 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('provider_name', sa.String(length=255), nullable=False),
         sa.Column('resource_id', sa.String(length=36),
                   nullable=False, unique=True),
+        mysql_engine='InnoDB',
     )
 
     # dropping unused tables
@@ -66,7 +67,8 @@ def downgrade(active_plugins=None, options=None):
         sa.Column('description', sa.String(255)),
         sa.Column('default', sa.Boolean(), nullable=False, default=False),
         sa.Column('num_instances', sa.Integer, default=0),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'servicedefinitions',
@@ -77,6 +79,7 @@ def downgrade(active_plugins=None, options=None):
         sa.Column('service_type_id', sa.String(36),
                   sa.ForeignKey('servicetypes.id',
                                 ondelete='CASCADE')),
-        sa.PrimaryKeyConstraint('id', 'service_class')
+        sa.PrimaryKeyConstraint('id', 'service_class'),
+        mysql_engine='InnoDB'
     )
     op.drop_table('providerresourceassociations')

@@ -50,7 +50,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('network_id', sa.String(length=36), nullable=True),
         sa.Column('segmentation_id', sa.Integer(),
                   autoincrement=False, nullable=True),
-        sa.PrimaryKeyConstraint('id'))
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB')
 
     op.create_table(
         'arista_provisioned_vms',
@@ -60,13 +61,15 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('host_id', sa.String(length=255), nullable=True),
         sa.Column('port_id', sa.String(length=36), nullable=True),
         sa.Column('network_id', sa.String(length=36), nullable=True),
-        sa.PrimaryKeyConstraint('id'))
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB')
 
     op.create_table(
         'arista_provisioned_tenants',
         sa.Column('tenant_id', sa.String(length=255), nullable=True),
         sa.Column('id', sa.String(length=36), nullable=False),
-        sa.PrimaryKeyConstraint('id'))
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB')
 
 
 def downgrade(active_plugins=None, options=None):

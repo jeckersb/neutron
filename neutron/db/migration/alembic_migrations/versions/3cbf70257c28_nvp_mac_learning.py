@@ -53,7 +53,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('mac_learning_enabled', sa.Boolean(), nullable=False),
         sa.ForeignKeyConstraint(
             ['port_id'], ['ports.id'], ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('port_id'))
+        sa.PrimaryKeyConstraint('port_id'),
+        mysql_engine='InnoDB')
 
 
 def downgrade(active_plugins=None, options=None):

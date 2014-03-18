@@ -60,7 +60,8 @@ def upgrade(active_plugins=None, options=None):
                                          name='qosqueues_qos_marking'),
                   nullable=True),
         sa.Column('dscp', sa.Integer(), nullable=True),
-        sa.PrimaryKeyConstraint('id')
+        sa.PrimaryKeyConstraint('id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'networkqueuemappings',
@@ -70,7 +71,8 @@ def upgrade(active_plugins=None, options=None):
                                 ondelete='CASCADE'),
         sa.ForeignKeyConstraint(['queue_id'], ['qosqueues.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('network_id')
+        sa.PrimaryKeyConstraint('network_id'),
+        mysql_engine='InnoDB'
     )
     op.create_table(
         'portqueuemappings',
@@ -78,7 +80,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('queue_id', sa.String(length=36), nullable=False),
         sa.ForeignKeyConstraint(['port_id'], ['ports.id'], ondelete='CASCADE'),
         sa.ForeignKeyConstraint(['queue_id'], ['qosqueues.id'], ),
-        sa.PrimaryKeyConstraint('port_id', 'queue_id')
+        sa.PrimaryKeyConstraint('port_id', 'queue_id'),
+        mysql_engine='InnoDB'
     )
     ### end Alembic commands ###
 

@@ -50,7 +50,8 @@ def upgrade(active_plugins=None, options=None):
                                 ondelete='CASCADE'),
         sa.ForeignKeyConstraint(['pool_id'], ['pools.id'],
                                 ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('pool_id')
+        sa.PrimaryKeyConstraint('pool_id'),
+        mysql_engine='InnoDB'
     )
     ### end Alembic commands ###
 

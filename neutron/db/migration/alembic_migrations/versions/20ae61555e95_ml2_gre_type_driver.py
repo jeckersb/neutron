@@ -48,13 +48,15 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('gre_id', sa.Integer, nullable=False,
                   autoincrement=False),
         sa.Column('allocated', sa.Boolean, nullable=False),
-        sa.PrimaryKeyConstraint('gre_id')
+        sa.PrimaryKeyConstraint('gre_id'),
+        mysql_engine='InnoDB'
     )
 
     op.create_table(
         'ml2_gre_endpoints',
         sa.Column('ip_address', sa.String(length=64)),
-        sa.PrimaryKeyConstraint('ip_address')
+        sa.PrimaryKeyConstraint('ip_address'),
+        mysql_engine='InnoDB'
     )
 
 

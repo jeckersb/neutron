@@ -52,7 +52,8 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('distributed', sa.Boolean(), nullable=False),
         sa.ForeignKeyConstraint(
             ['router_id'], ['routers.id'], ondelete='CASCADE'),
-        sa.PrimaryKeyConstraint('router_id')
+        sa.PrimaryKeyConstraint('router_id'),
+        mysql_engine='InnoDB'
     )
 
 

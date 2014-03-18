@@ -48,6 +48,7 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('switch_ip', sa.String(length=255), nullable=True),
         sa.Column('instance_id', sa.String(length=255), nullable=True),
         sa.PrimaryKeyConstraint('binding_id'),
+        mysql_engine='InnoDB',
     )
     op.create_table(
         'cisco_ml2_credentials',
@@ -57,6 +58,7 @@ def upgrade(active_plugins=None, options=None):
         sa.Column('user_name', sa.String(length=255), nullable=True),
         sa.Column('password', sa.String(length=255), nullable=True),
         sa.PrimaryKeyConstraint('tenant_id', 'credential_name'),
+        mysql_engine='InnoDB',
     )
 
 
